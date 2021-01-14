@@ -293,7 +293,7 @@ namespace DNWS
                 if (!parameters.ContainsKey("username"))
                 {
                     sb.Append("<h2>Login</h2>");
-                    sb.Append("<form method=\"get\">");
+                    sb.Append("<form autocomplete=\"off\" method=\"get\">");
                     sb.Append("Username: <input type=\"text\" name=\"username\" value=\"\" /> <br />");
                     sb.Append("Password: <input type=\"password\" name=\"password\" value=\"\" /> <br />");
                     sb.Append("<input type=\"submit\" name=\"action\" value=\"Login\" /> <br />");

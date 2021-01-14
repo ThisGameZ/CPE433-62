@@ -200,6 +200,7 @@ namespace DNWS
                     else
                     {
                         response = getFile(ROOT + "/" + request.Filename);
+                        /// response.something = this.localEndPoint.toString();
                     }
                 }
                 // post processing pipe
