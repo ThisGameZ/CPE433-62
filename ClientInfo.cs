@@ -31,13 +31,18 @@ namespace DNWS
     {
       HTTPResponse response = null;
       StringBuilder sb = new StringBuilder();
-      sb.Append("<html><body><h1>CLIENT INFO</h1>");
-      String[] ip = request.getPropertyByKey("RemoteEndPoint").Split(":");
+      sb.Append("<html><body><h1>CLIENT INFO</h1>"); 
+      String[] ip = request.getPropertyByKey("RemoteEndPoint").Split(":"); // split ip and port
+
+      /// Show the results 
+      sb.Append("<h2>Sahatham Promthongpan 620615034</h2>");
       sb.Append("<h3>" + "Client IP Address: " + "<span>" + ip[0] + "</span>" +"</h3>");
       sb.Append("<h3>" + "Client Port: "+ "<span>" + ip[1] + "</span>"+ "</h3>");
       sb.Append("<h3>" + "Browser Information: "+ "<span>" + request.getPropertyByKey("user-agent") + "</span>"+ "</h3>");
       sb.Append("<h3>" + "Accept-Charset: "+ "<span>" + request.getPropertyByKey("accept-language")+ "</span>" + "</h3>");
       sb.Append("<h3>" + "Accept-Encoding: "+ "<span>" + request.getPropertyByKey("accept-encoding")+ "</span>" + "</h3>");
+
+
       sb.Append("</body></html>");
       response = new HTTPResponse(200);
       response.body = Encoding.UTF8.GetBytes(sb.ToString());
