@@ -288,16 +288,25 @@ namespace DNWS
             serverSocket.Bind(localEndPoint);
             serverSocket.Listen(5);
             _parent.Log("Server started at port " + _port + ".");
+            int count = 0; // For counting number of connection
             while (true)
             {
                 try
                 {
                     // Wait for client
                     clientSocket = serverSocket.Accept();
+                    count++; // Connection numbers
                     // Get one, show some info
-                    _parent.Log("Client accepted:" + clientSocket.RemoteEndPoint.ToString());
+                    _parent.Log("Connection number: " + count + ", Client accepted:" + clientSocket.RemoteEndPoint.ToString());
                     HTTPProcessor hp = new HTTPProcessor(clientSocket, _parent);
-                    hp.Process();
+                     
+                    // Test 500 request at a time, result: Error 0 %
+                    // Test 1000 request at a time, result: AvgError 10-30% | Sometimes error doesn't occur
+                    // Test 5000 request at a time, result: AvgError 30-50% 
+
+                    Thread t = new Thread(new ThreadStart(hp.Process)); // Assign hp.Process to run when thread start
+                    t.Start(); // this will start hp.Process on thread
+                    
                 }
                 catch (Exception ex)
                 {
@@ -305,5 +314,6 @@ namespace DNWS
                 }
             }
         }
+        
     }
 }
